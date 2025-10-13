@@ -1,0 +1,39 @@
+EASY
+1. In SQL server we use BULK INSERT to import any excel table. In SQL server we write code by using bulk insert command and copy the path of the main file and import the table to SQL server. The advantage of this is that the person after us knows where this table came from
+2. .csv , .xml , .sql , .txt
+use SchoolDB
+3.create table Products (ProductID int primary key,ProductName varchar(50),Price decimal(10,2))
+4. insert into Products (ProductID,ProductName,Price)
+values (1,'Potato',6000.00),(2,'Onion',4000.00),(3,'Carrot',9000.00)
+select * from Products
+5. NULL is a blank space, it is not necessary to put any information there, for example, if there is no information, NULL is written there, while NOT NULL always requires something to be written there, there must always be information there.
+6. ALTER table Products 
+Add constraint uq_ProductName UNIQUE (ProductName) 
+7. --I used a UNIQUE constraint to ensure that the ProductName column has unique data. Now, once entered, it is not possible to re-enter the same data.
+8. Alter table Products
+add CategoryID int
+9. create table Categories (CategoryID int primary key,CategoryName varchar (50) unique)
+10. Identity basically automatically determines where each row is in the table. For example, if we write IDENTITY(1,1), it will number the rows until we finish the table, starting from 1 and keeping 1 space, i.e. 1,2,3,4,5...
+Medium
+11. Bulk insert Products from 'C:\Users\Hp\Downloads\products.txt' with 
+(fieldterminator = ',' , rowterminator = '\n', firstrow = 2)
+12. alter table Products 
+add constraint fk_products_categories 
+foreign key (CategoryID) 
+references Categories (CategoryID)
+13. In a primary key, data is not repeated throughout the entire table. In a unique key, data is unique across columns. Can you use unique across multiple columns in a single table?
+14. alter table Products
+add constraint chk_prise check (Price > 0)
+15. alter table Products
+add Stock int NOT NULL default 0
+16. select ProductName, isnull (CategoryID, 0) as CategoryID from Products
+17. FOREIGN key is used to prevent errors and guarantee data integrity, and it is used to directly relate to the Primary key in another table.
+18. create table Customers (CustomerID int primary key,CustomerName varchar (50),Age int check (Age >= 18))
+19. create table People (ID int identity (100,10) primary key, Name varchar(50))
+20. create table OrderDetails (OrderID int, ProductID int, Quantity int, Price decimal (10,2),primary key (OrderID, ProductID))
+21. INSULL is basically if we put NULL in a column in SQL and we do not put any information, a NULL record will be output, while insull is used to replace the NULL record in that column with another word, for example, you can replace NULL with no info or any other arbitrary word. COALESCE is, in short, if it is not there, then another, for example, let's create a table in which Ali Vali and their homenumber are given null there, but one of them has Ali's mobile number. If we use Coalesce, we get Ali's mobilenumber as the number, but since there are no 2 numbers in the value, a null or insull is used in its row, another name is written. In short, for contacts, even if Ali's homenumber is not available, a mobile number is output, and since there are no 2 numbers in the value, null is put there, if there is any number in the value, it would be output.
+22. create table Employees (EmpID int primary key, Name varchar (50), Email varchar(50) unique)
+23. create table Employees (EmpID int primary key, Name varchar (50), Email varchar(50) unique, foreign key (EmpID) references Customers(CustomerID)
+on delete cascade 
+on update cascade)
+select * from Employees
